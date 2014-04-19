@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<desktop app="equivium" date="22/11/2008">
+	<menu label="Equivium">
+		<menuitem label="Sair" classname="null" close="true" />
+	</menu>
+	<menu label="Cadastros">
+		<menuitem label="Anagramas" classname="telas.cadastros.FrmCadAnagramas" close="false" />
+		<menuitem label="Estímulos" classname="telas.cadastros.FrmCadEstimulos" close="false" />
+		<menuitem label="Fases" classname="telas.cadastros.FrmCadFases" close="false" />
+		<menuitem label="Participantes" classname="telas.cadastros.FrmCadParticipantes" close="false" />
+		<menuitem label="Pesquisadores" classname="telas.cadastros.FrmCadPesquisadores" close="false" />
+		<menuitem label="Reforço" classname="telas.cadastros.FrmCadReforco" close="false" />
+		<menuitem label="Sessão" classname="telas.cadastros.FrmCadSessao" close="false" />
+		<menuitem label="Sessão Anagrama" classname="telas.cadastros.FrmCadSessaoAnagrama" close="false" />
+		<menuitem label="Tentativas" classname="telas.cadastros.FrmCadTentativas" close="false" />
+	</menu>
+	<menu label="Anotações">
+		<menuitem label="Anotações" classname="telas.cadastros.FrmCadAnotacoes" close="false" />
+		<menuitem label="Realiza Anagramas" classname="telas.cadastros.FrmCadRealizaAnagrama" close="false" />
+		<menuitem label="Realiza Sessão" classname="telas.cadastros.FrmCadRealizaSessao" close="false" />
+	</menu>
+	<menu label="Realizar">
+		<menuitem label="Anagrama" classname="telas.realiza.anagrama.FrmRealizaSesAnagrama" close="false" />
+		<menuitem label="Sessão" classname="telas.realiza.sessao.FrmRealizaSessao" close="false" />
+	</menu>
+	<menu label="Relatórios">
+		<menuitem label="Análise de Respostas" classname="telas.relatorios.FrmRelAnaliseRespostas" close="false" />
+		<menuitem label="Pesquisadores" classname="telas.relatorios.FrmRelPesquisadores" close="false" />
+		<menuitem label="Participantes" classname="telas.relatorios.FrmRelParticipantes" close="false" />
+		<menuitem label="Tentativas" classname="telas.relatorios.FrmRelTentativas" close="false" />
+		<menuitem label="Estímulos" classname="telas.relatorios.FrmRelEstimulos" close="false" />
+		<menuitem label="Fases" classname="telas.relatorios.FrmRelFases" close="false" />
+		<menuitem label="Sessões" classname="telas.relatorios.FrmRelSessoes" close="false" />
+		<menuitem label="Anagramas" classname="telas.relatorios.FrmRelAnagramas" close="false" />
+		<menuitem label="Sessões de Anagramas" classname="telas.relatorios.FrmRelSessoesAnagramas" close="false" />
+		v<menuitem label="Análise de Respostas de Anagramas" classname="telas.relatorios.FrmRelAnaliseRespostasAnagrama" close="false" />
+	</menu>
+</desktop>

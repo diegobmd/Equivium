@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!-- XML BUILD COMPLETO !-->
+<!-- Autor: Diego !-->
+<project default="default" name="XML BUILD COMPLETO " >
+
+	<property name="srcDir" location="./" />
+	<property name="buildDir" location="../build" />
+	<property name="distDir" location="../dist" />
+	<property name="imgDir" location="../dist/imagens/sis" />
+	<property name="bancoDir" location="../dist/banco/hsqldb" />
+	<property name="scripts" location="../dist/banco/scripts" />
+	<property name="scriptsexec" location="../dist/banco/scripts/exec" />
+	<property name="log" location="../dist/log" />
+	<!--
+	<property name="bancoAntDir" location="../dist/banco/access" /> 
+	-->
+
+	<property name="relatorios" location="../dist/relatorios" />
+	<property name="classPath"
+		value="
+		commons-beanutils-1.7.jar
+		commons-collections-2.1.jar
+		commons-digester-1.7.jar
+		commons-logging-1.0.2.jar
+		commons-net-1.4.1.jar
+		hsqldb.jar
+		itext-1.3.1.jar
+		jasperreports-2.0.5.jar
+		jdom.jar
+		jdt-compiler-3.1.1.jar
+		jmf.jar
+		libX.jar
+		mediaplayer.jar
+		mp3plugin.jar
+		poi-3.0.1-FINAL-20070705.jar
+	" />
+
+	<tstamp>
+		<format property="date" pattern="dd/MM/yyyy HH:MM:ss" />
+	</tstamp>
+
+	<target name="clean">
+		<delete dir="${buildDir}" />
+		<delete dir="${distDir}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<tstamp />
+		<mkdir dir="${buildDir}" />
+		<mkdir dir="${distDir}" />
+		<mkdir dir="${imgDir}" />
+		<mkdir dir="${bancoDir}" />
+		<!-- <mkdir dir="${bancoAntDir}" /> -->
+		<mkdir dir="${relatorios}" />
+		<mkdir dir="${log}" />
+		<mkdir dir="${scripts}" />
+		<mkdir dir="${scriptsexec}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${srcDir}" destdir="${buildDir}"  encoding="iso-8859-1">
+			<exclude name="testes/**" />
+		</javac>
+	</target>
+
+	<target name="copyFiles" depends="compile">
+
+		<copy todir="${bancoDir}">
+			<fileset dir="./banco/hsqldb">
+				<include name="*.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${distDir}">
+			<fileset dir="external">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+		<!--
+		<copy todir="${distDir}">
+			<fileset dir=".">
+				<include name="*.mdb" />
+			</fileset>
+		</copy>
+		-->
+		<!--
+		<copy todir="${distDir}">
+			<fileset dir=".">
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		-->
+
+		<copy todir="${imgDir}">
+			<fileset dir="./imagens/sis">
+				<include name="*.gif" />
+			</fileset>
+		</copy>
+
+
+		<copy todir="${distDir}">
+			<fileset dir=".">
+				<include name="banco.xml" />
+				<include name="bancoA.xml" />
+				<include name="menu.xml" />
+			</fileset>
+		</copy>
+
+
+		<copy todir="${relatorios}">
+			<fileset dir="./relatorios">
+				<include name="*.jrxml" />
+				<include name="*.jasper" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="default" depends="copyFiles">
+		<jar destfile="${distDir}/equivium.jar" basedir="${buildDir}">
+			<fileset dir="./" includes="**.gif, **.class" />
+			<manifest>
+				<attribute name="Created-By" value="Diego" />
+				<attribute name="Built-By" value="Diego" />
+				<attribute name="Built-Date" value="${date}" />
+				<attribute name="Main-Class" value="telas.principal.FrmLogin" />
+				<attribute name="Class-Path" value="${classPath}" />
+			</manifest>
+		</jar>
+	</target>
+
+
+</project>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Database Name="HSQLDB" App="EQUIVIUM" Date="01/12/2008">
+	<Table Name="ANOTACOES">
+		<Column Name="ANO_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="ANO_PARTICIPANTE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ANO_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="ANO_DESCRICAO" Type="-1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="LONGVARCHAR" DisplaySize="2147483647" PrimaryKey="false" Default="null" />
+		<Column Name="ANO_DATA" Type="91" ClassName="java.sql.Date" Nullable="false" AutoIncrement="false" TypeName="DATE" DisplaySize="10" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ESCOLARIDADE">
+		<Column Name="ESC_CODIGO" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="true" TypeName="INTEGER" DisplaySize="11" PrimaryKey="true" Default="null" />
+		<Column Name="ESC_DESCRICAO" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ESTADO">
+		<Column Name="EST_SIGLA" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="2" PrimaryKey="false" Default="null" />
+		<Column Name="EST_DESCRICAO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ESTIMULOS">
+		<Column Name="EST_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="EST_SIGLA" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="EST_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="EST_AUDIO_PATH" Type="12" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="255" PrimaryKey="false" Default="null" />
+		<Column Name="EST_FIGURA_PATH" Type="12" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="255" PrimaryKey="false" Default="null" />
+		<Column Name="EST_PALAVRA" Type="12" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="EST_INTERVALO" Type="8" ClassName="java.lang.Double" Nullable="false" AutoIncrement="false" TypeName="DOUBLE" DisplaySize="23" PrimaryKey="false" Default="0.0E0" />
+		<Column Name="EST_COR_FUNDO" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="0" />
+		<Column Name="EST_COR_FONTE" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="0" />
+	</Table>
+	<Table Name="ESTIMULOS_AUDIOS">
+		<Column Name="AUD_ESTIMULO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="AUD_ARQUIVO" Type="-4" ClassName="[B" Nullable="false" AutoIncrement="false" TypeName="LONGVARBINARY" DisplaySize="2147483647" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ESTIMULOS_FIGURAS">
+		<Column Name="FIG_ESTIMULO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="FIG_ARQUIVO" Type="-4" ClassName="[B" Nullable="false" AutoIncrement="false" TypeName="LONGVARBINARY" DisplaySize="2147483647" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ESTIMULOS_SUB_FASE">
+		<Column Name="EST_SUB_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="EST_SUB_FASE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="EST_SUB_ESTIMULO_MODELO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="EST_SUB_ESTIMULO_MODELO_TIPO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="EST_SUB_ESTIMULO_ESCOLHA" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="EST_SUB_ESTIMULO_ESCOLHA_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="FASES">
+		<Column Name="FAS_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="FAS_NOME" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="FAS_SIGLA" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="FASES_SUB_FASES">
+		<Column Name="SUB_FAS_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="SUB_FAS_SUB_FASE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_FAS_FASE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ITENS_REALIZA_SESSAO">
+		<Column Name="ITE_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="ITE_SUB_FASE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_REALIZA" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_AGRUPADOR" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_TENTATIVA" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_TEMPO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ORDEM_EXEC" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="0" />
+		<Column Name="ITE_SUB_INSTANCIA" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="0" />
+		<Column Name="ITE_MODELO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHIDO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESC_CORRETO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="0" />
+		<Column Name="ITE_ESCOLHA_1" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_2" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_3" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_4" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_5" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_6" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_MODELO_TIPO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHIDO_TIPO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESC_CORRETO_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_1_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_2_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_3_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_4_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_5_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="ITE_ESCOLHA_6_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="PARTICIPANTES">
+		<Column Name="PAR_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="PAR_ESCOLARIDADE" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_PAI_ESCOLARIDADE" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_MAE_ESCOLARIDADE" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_ESTADO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="2" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_PROJETO" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_INICIAIS" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="3" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_SEXO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_NASCIMENTO" Type="91" ClassName="java.sql.Date" Nullable="false" AutoIncrement="false" TypeName="DATE" DisplaySize="10" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_MAE_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_PAI_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_ENDERECO" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_COMPLEMENTO" Type="12" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_NUMERO" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="10" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_CEP" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="PAR_TELEFONE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="PESQUISADORES">
+		<Column Name="PES_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="PES_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="PES_LOGIN" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="PES_SENHA" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="REALIZA_SESSAO">
+		<Column Name="RSE_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="RSE_SIGLA" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="RSE_NOME" Type="12" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="RSE_ANOTACAO" Type="-1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="LONGVARCHAR" DisplaySize="2147483647" PrimaryKey="false" Default="null" />
+		<Column Name="RSE_PARTICIPANTE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="RSE_PESQUISADOR" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="RSE_DATA" Type="91" ClassName="java.sql.Date" Nullable="false" AutoIncrement="false" TypeName="DATE" DisplaySize="10" PrimaryKey="false" Default="CURRENT_DATE" />
+	</Table>
+	<Table Name="REFORCOS">
+		<Column Name="REF_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="REF_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="REF_AUDIO" Type="-1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="LONGVARCHAR" DisplaySize="2147483647" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="REFORCOS_AUDIOS">
+		<Column Name="AUD_REFORCO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="AUD_ARQUIVO" Type="-4" ClassName="[B" Nullable="false" AutoIncrement="false" TypeName="LONGVARBINARY" DisplaySize="2147483647" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="SESSAO_FASES">
+		<Column Name="SES_FAS_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="SES_FAS_SESSAO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="SES_FAS_FASE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="SESSOES">
+		<Column Name="SES_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="SES_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="SES_SIGLA" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="SES_REFORCO_FIM" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="SUB_FASES">
+		<Column Name="SUB_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="SUB_REFORCO_ACERTO" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_REFORCO_FIM" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_MINIMO_TENTATIVAS" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_ESTIMULOS_VEZ" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_INTERVALO_MOD_ESC" Type="6" ClassName="java.lang.Double" Nullable="false" AutoIncrement="false" TypeName="FLOAT" DisplaySize="23" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_GRADE" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_PORCENTAGEM" Type="6" ClassName="java.lang.Double" Nullable="false" AutoIncrement="false" TypeName="FLOAT" DisplaySize="23" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_SIGLA" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="SUB_RESP_OBS" Type="16" ClassName="java.lang.Boolean" Nullable="false" AutoIncrement="false" TypeName="BOOLEAN" DisplaySize="5" PrimaryKey="false" Default="TRUE" />
+	</Table>
+	<Table Name="ANAGRAMAS">
+		<Column Name="ANA_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="ANA_SIGLA" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_REFORCO_ACERTO" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_MINIMO_TENTATIVAS" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_PORCENTAGEM" Type="6" ClassName="java.lang.Double" Nullable="false" AutoIncrement="false" TypeName="FLOAT" DisplaySize="23" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_EXTRA_VEZ" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ANAGRAMA_ESTIMULOS">
+		<Column Name="ANA_EST_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_EST_ESTIMULO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_EST_TIPO" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="ANAGRAMA_ESTI_EXTRA">
+		<Column Name="ANA_EST_EXT_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="ANA_EST_EXT_ESTIMULO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="SESSAO_ANAGRAMA">
+		<Column Name="SES_ANA_SESSAO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="SES_ANA_ANAGRAMA" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="SESSOES_ANAGRAMA">
+		<Column Name="SAN_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="SAN_NOME" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="SAN_SIGLA" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="SAN_REFORCO_FIM" Type="-5" ClassName="java.lang.Long" Nullable="true" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+	</Table>
+	<Table Name="REALIZA_ANAGRAMA">
+		<Column Name="RAN_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="RAN_SIGLA" Type="1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="CHAR" DisplaySize="4" PrimaryKey="false" Default="null" />
+		<Column Name="RAN_NOME" Type="12" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="50" PrimaryKey="false" Default="null" />
+		<Column Name="RAN_ANOTACAO" Type="-1" ClassName="java.lang.String" Nullable="true" AutoIncrement="false" TypeName="LONGVARCHAR" DisplaySize="2147483647" PrimaryKey="false" Default="null" />		
+		<Column Name="RAN_PARTICIPANTE" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="RAN_PESQUISADOR" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="RAN_DATA" Type="91" ClassName="java.sql.Date" Nullable="false" AutoIncrement="false" TypeName="DATE" DisplaySize="10" PrimaryKey="false" Default="CURRENT_DATE" />
+	</Table>
+	<Table Name="ITENS_REALIZA_ANAGRAMA">
+		<Column Name="IAN_CODIGO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="true" TypeName="BIGINT" DisplaySize="20" PrimaryKey="true" Default="null" />
+		<Column Name="IAN_REALIZA" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_ANAGRAMA" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_ANA_INSTANCIA" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="0" />
+		<Column Name="IAN_MODELO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_MODELO_TIPO" Type="1" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="CHAR" DisplaySize="1" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_RESULTADO" Type="12" ClassName="java.lang.String" Nullable="false" AutoIncrement="false" TypeName="VARCHAR" DisplaySize="10" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_TENTATIVA" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_TEMPO" Type="-5" ClassName="java.lang.Long" Nullable="false" AutoIncrement="false" TypeName="BIGINT" DisplaySize="20" PrimaryKey="false" Default="null" />
+		<Column Name="IAN_ORDEM_EXEC" Type="4" ClassName="java.lang.Integer" Nullable="false" AutoIncrement="false" TypeName="INTEGER" DisplaySize="11" PrimaryKey="false" Default="0" />
+	</Table>
+</Database>

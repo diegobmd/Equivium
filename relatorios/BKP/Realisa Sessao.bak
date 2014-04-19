@@ -1,0 +1,1770 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="Equivium: Análise de respostas"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 whenResourceMissingType="Empty">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="fontePadrao"
+		isDefault="true"
+		fill="Solid"
+		fontName="Arial"
+		isBlankWhenNull="true"
+	>
+	</style>
+	<style 
+		name="fonteTitulo"
+		isDefault="false"
+		isStyledText="false"
+		fontName="Verdana"
+		fontSize="18"
+		isBold="true"
+		isItalic="false"
+		isUnderline="true"
+		isBlankWhenNull="true"
+	>
+	</style>
+
+	<parameter name="sql" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[SELECT 
+	 RSE_CODIGO            AS REL_REALIZA          ,
+	 PES_NOME              AS REL_PESQUISADOR      ,
+	 PAR_NOME              AS REL_PARTICIPANTE     ,
+   RSE_DATA              AS REL_REALIZA_DATA     ,
+   ITE_SUB_INSTANCIA     AS REL_SUB_INSTANCIA    ,
+   SUB_NOME              AS REL_SUB_FASE         ,
+   SUB_MINIMO_TENTATIVAS AS REL_MINIMO_TENTATIVAS,
+   SUB_ESTIMULOS_VEZ     AS REL_ESTMULOS_VEZ     ,
+   SUB_INTERVALO_MOD_ESC AS REL_INTERVALO_MOD_ESC,
+   SUB_PORCENTAGEM       AS REL_PORCENTAGEM      ,
+   ITE_AGRUPADOR         AS REL_AGRUPADOR        ,
+   ITE_TENTATIVA         AS REL_TENTATIVA        ,
+   (ITE_TEMPO/1000)             AS REL_TEMPO            ,
+   ITE_ORDEM_EXEC        AS REL_ORDEM_EXEC       ,
+   E1.EST_SIGLA          AS REL_SIGLA_MODELO     ,
+   E3.EST_SIGLA          AS REL_SIGLA_CORRETO    ,
+   E2.EST_SIGLA          AS REL_SIGLA_ESCOLHIDO  ,
+   E4.EST_SIGLA          AS REL_SIGLA_ESCOLHA_1  ,
+   E5.EST_SIGLA          AS REL_SIGLA_ESCOLHA_2  ,
+   E6.EST_SIGLA          AS REL_SIGLA_ESCOLHA_3  ,
+   E7.EST_SIGLA          AS REL_SIGLA_ESCOLHA_4  ,
+   E8.EST_SIGLA          AS REL_SIGLA_ESCOLHA_5  ,
+   E9.EST_SIGLA          AS REL_SIGLA_ESCOLHA_6  ,
+	 ITE_MODELO_TIPO       AS REL_MODELO_TIPO      ,
+	 ITE_ESCOLHIDO_TIPO    AS REL_ESCOLHIDO_TIPO   ,
+	 ITE_ESC_CORRETO_TIPO  AS REL_ESC_CORRETO_TIPO ,
+	 ITE_ESCOLHA_1_TIPO    AS REL_ESCOLHA_1_TIPO   ,
+	 ITE_ESCOLHA_2_TIPO    AS REL_ESCOLHA_2_TIPO   ,
+	 ITE_ESCOLHA_3_TIPO    AS REL_ESCOLHA_3_TIPO   ,
+	 ITE_ESCOLHA_4_TIPO    AS REL_ESCOLHA_4_TIPO   ,
+	 ITE_ESCOLHA_5_TIPO    AS REL_ESCOLHA_5_TIPO   ,
+	 ITE_ESCOLHA_6_TIPO    AS REL_ESCOLHA_6_TIPO 
+FROM 
+REALIZA_SESSAO
+LEFT JOIN PESQUISADORES        ON REALIZA_SESSAO.RSE_PESQUISADOR       = PESQUISADORES.PES_CODIGO
+LEFT JOIN PARTICIPANTES        ON REALIZA_SESSAO.RSE_PARTICIPANTE      = PARTICIPANTES.PAR_CODIGO
+LEFT JOIN ITENS_REALIZA_SESSAO ON REALIZA_SESSAO.RSE_CODIGO            = ITENS_REALIZA_SESSAO.ITE_REALIZA
+LEFT JOIN SUB_FASES            ON ITENS_REALIZA_SESSAO.ITE_SUB_FASE    = SUB_FASES.SUB_CODIGO
+LEFT JOIN ESTIMULOS AS E1      ON ITENS_REALIZA_SESSAO.ITE_MODELO      = E1.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E2      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHIDO   = E2.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E3      ON ITENS_REALIZA_SESSAO.ITE_ESC_CORRETO = E3.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E4      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHA_1   = E4.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E5      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHA_2   = E5.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E6      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHA_3   = E6.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E7      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHA_4   = E7.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E8      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHA_5   = E8.EST_CODIGO
+LEFT JOIN ESTIMULOS AS E9      ON ITENS_REALIZA_SESSAO.ITE_ESCOLHA_6   = E9.EST_CODIGO
+ $P!{sql}]]></queryString>
+
+	<field name="REL_REALIZA" class="java.lang.Long"/>
+	<field name="REL_PESQUISADOR" class="java.lang.String"/>
+	<field name="REL_PARTICIPANTE" class="java.lang.String"/>
+	<field name="REL_REALIZA_DATA" class="java.sql.Date"/>
+	<field name="REL_SUB_INSTANCIA" class="java.lang.Integer"/>
+	<field name="REL_SUB_FASE" class="java.lang.String"/>
+	<field name="REL_MINIMO_TENTATIVAS" class="java.lang.Integer"/>
+	<field name="REL_ESTMULOS_VEZ" class="java.lang.Integer"/>
+	<field name="REL_INTERVALO_MOD_ESC" class="java.lang.Double"/>
+	<field name="REL_PORCENTAGEM" class="java.lang.Double"/>
+	<field name="REL_AGRUPADOR" class="java.lang.Integer"/>
+	<field name="REL_TENTATIVA" class="java.lang.Integer"/>
+	<field name="REL_TEMPO" class="java.lang.Long"/>
+	<field name="REL_ORDEM_EXEC" class="java.lang.Integer"/>
+	<field name="REL_SIGLA_MODELO" class="java.lang.String"/>
+	<field name="REL_SIGLA_CORRETO" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHIDO" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHA_1" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHA_2" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHA_3" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHA_4" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHA_5" class="java.lang.String"/>
+	<field name="REL_SIGLA_ESCOLHA_6" class="java.lang.String"/>
+	<field name="REL_MODELO_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHIDO_TIPO" class="java.lang.String"/>
+	<field name="REL_ESC_CORRETO_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHA_1_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHA_2_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHA_3_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHA_4_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHA_5_TIPO" class="java.lang.String"/>
+	<field name="REL_ESCOLHA_6_TIPO" class="java.lang.String"/>
+
+	<sortField name="REL_REALIZA" />
+	<sortField name="REL_SUB_INSTANCIA" />
+	<sortField name="REL_SUB_FASE" />
+	<sortField name="REL_AGRUPADOR" />
+	<sortField name="REL_TENTATIVA" />
+
+	<variable name="var_acertos" class="java.lang.Long" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{REL_SIGLA_ESCOLHIDO}==$F{REL_SIGLA_CORRETO}?new Long(1):new Long(0)]]></variableExpression>
+	</variable>
+	<variable name="var_cont" class="java.lang.Long" resetType="Report" calculation="Count">
+		<variableExpression><![CDATA[new Long(1)]]></variableExpression>
+	</variable>
+	<variable name="var_per_acerto" class="java.lang.Double" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Double(($V{var_acertos}.doubleValue()/$V{var_cont}.doubleValue())*100)]]></variableExpression>
+	</variable>
+
+		<group  name="realiza" isStartNewPage="true" >
+			<groupExpression><![CDATA[$F{REL_REALIZA}+$F{REL_PESQUISADOR}+$F{REL_PARTICIPANTE}+$F{REL_REALIZA_DATA}]]></groupExpression>
+			<groupHeader>
+			<band height="17"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" pattern="###0" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="55"
+						y="2"
+						width="25"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{REL_REALIZA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="106"
+						y="2"
+						width="65"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{REL_REALIZA_DATA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="278"
+						y="2"
+						width="200"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_PESQUISADOR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="542"
+						y="2"
+						width="237"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_PARTICIPANTE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="3"
+						y="2"
+						width="52"
+						height="13"
+						key="staticText-1"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Realiza nº ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="80"
+						y="2"
+						width="27"
+						height="13"
+						key="staticText-2"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Data: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="171"
+						y="2"
+						width="108"
+						height="13"
+						key="staticText-3"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Pesquisador: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="443"
+						y="2"
+						width="100"
+						height="13"
+						key="staticText-4"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Participante: ]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="0"
+						y="16"
+						width="780"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="1"
+						y="0"
+						width="780"
+						height="0"
+						backcolor="#CCCCFF"
+						key="line-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="sub_instancia" >
+			<groupExpression><![CDATA[$F{REL_SUB_INSTANCIA}+$F{REL_SUB_FASE}+$F{REL_MINIMO_TENTATIVAS}+$F{REL_ESTMULOS_VEZ}+$F{REL_INTERVALO_MOD_ESC}+$F{REL_PORCENTAGEM}]]></groupExpression>
+			<groupHeader>
+			<band height="34"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="73"
+						y="2"
+						width="26"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{REL_SUB_INSTANCIA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="161"
+						y="2"
+						width="192"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SUB_FASE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="413"
+						y="2"
+						width="25"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{REL_MINIMO_TENTATIVAS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="516"
+						y="2"
+						width="26"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{REL_ESTMULOS_VEZ}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="632"
+						y="2"
+						width="27"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{REL_INTERVALO_MOD_ESC}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="728"
+						y="2"
+						width="41"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{REL_PORCENTAGEM}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="22"
+						y="2"
+						width="51"
+						height="13"
+						key="staticText-5"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[Instância: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="101"
+						y="2"
+						width="55"
+						height="13"
+						key="staticText-6"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[Tentativa: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="360"
+						y="2"
+						width="52"
+						height="13"
+						key="staticText-7"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[Min. tent.: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="440"
+						y="2"
+						width="75"
+						height="13"
+						key="staticText-8"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[Estimulos vez: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="543"
+						y="2"
+						width="87"
+						height="13"
+						key="staticText-9"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[Interv. Mod/Esc: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="660"
+						y="2"
+						width="69"
+						height="13"
+						key="staticText-10"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[Porcentagem : ]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="19"
+						y="16"
+						width="761"
+						height="0"
+						backcolor="#CCCCFF"
+						key="line-3"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="770"
+						y="2"
+						width="12"
+						height="13"
+						key="staticText-11"/>
+					<box></box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="22"
+						y="17"
+						width="50"
+						height="11"
+						key="staticText-16"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Tentativa]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="101"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-27"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="73"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-28"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="156"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-29"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="171"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-30"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="226"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-31"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="241"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-32"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="296"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-33"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="311"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-34"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="366"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-35"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="379"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-36"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="434"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-37"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="449"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-38"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="504"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-39"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="519"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-40"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="574"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-41"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="589"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-42"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="644"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-43"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="658"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-44"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="713"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-45"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="727"
+						y="17"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-46"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="74"
+						y="17"
+						width="26"
+						height="11"
+						key="staticText-17"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Ordem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="102"
+						y="17"
+						width="53"
+						height="11"
+						key="staticText-18"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Modelo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="172"
+						y="17"
+						width="52"
+						height="11"
+						key="staticText-19"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Correto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="242"
+						y="17"
+						width="53"
+						height="11"
+						key="staticText-20"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolhido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="312"
+						y="17"
+						width="54"
+						height="11"
+						key="staticText-21"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolha P1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="380"
+						y="17"
+						width="53"
+						height="11"
+						key="staticText-22"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolha P2]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="449"
+						y="17"
+						width="55"
+						height="11"
+						key="staticText-23"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolha P3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="519"
+						y="17"
+						width="55"
+						height="11"
+						key="staticText-24"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolha P4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="589"
+						y="17"
+						width="55"
+						height="11"
+						key="staticText-25"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolha P5]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="659"
+						y="17"
+						width="54"
+						height="11"
+						key="staticText-26"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Escolha P6]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="728"
+						y="17"
+						width="51"
+						height="11"
+						key="staticText-27"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Tempo]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="19"
+						y="33"
+						width="761"
+						height="0"
+						backcolor="#CCCCFF"
+						key="line-47"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="157"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-28"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="227"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-29"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="298"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-30"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="367"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-31"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="434"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-32"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="505"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-33"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="575"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-34"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="645"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-35"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="714"
+						y="17"
+						width="13"
+						height="11"
+						key="staticText-36"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TP]]></text>
+				</staticText>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="agrupador" >
+			<groupExpression><![CDATA[$F{REL_AGRUPADOR}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="tentativa" >
+			<groupExpression><![CDATA[$F{REL_TENTATIVA}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="17"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="732"
+						y="2"
+						width="32"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{var_per_acerto}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="717"
+						y="16"
+						width="64"
+						height="0"
+						backcolor="#CCCCFF"
+						key="line-5"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Transparent"
+						x="769"
+						y="2"
+						width="12"
+						height="13"
+						key="staticText-13"/>
+					<box></box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[%]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="717"
+						y="0"
+						width="64"
+						height="0"
+						backcolor="#CCCCFF"
+						key="line-6"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="22"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="fonteTitulo"
+						x="193"
+						y="0"
+						width="391"
+						height="22"
+						key="staticText-14"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font isUnderline="false"/>
+					</textElement>
+				<text><![CDATA[ANALISE DE RESPOSTAS]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="681"
+						y="0"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="17"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="51"
+						y="2"
+						width="22"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{REL_TENTATIVA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="78"
+						y="2"
+						width="23"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{REL_ORDEM_EXEC}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="106"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_MODELO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="161"
+						y="2"
+						width="10"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_MODELO_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="176"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_CORRETO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="231"
+						y="2"
+						width="10"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESC_CORRETO_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="246"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHIDO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="301"
+						y="2"
+						width="10"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHIDO_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="316"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHA_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="384"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHA_2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="371"
+						y="2"
+						width="8"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHA_1_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="439"
+						y="2"
+						width="10"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHA_2_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="454"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHA_3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="509"
+						y="2"
+						width="10"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHA_3_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="524"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHA_4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="579"
+						y="2"
+						width="10"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHA_4_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="594"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHA_5}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="649"
+						y="2"
+						width="9"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHA_5_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="663"
+						y="2"
+						width="50"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_SIGLA_ESCOLHA_6}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="718"
+						y="2"
+						width="9"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{REL_ESCOLHA_6_TIPO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="732"
+						y="2"
+						width="27"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$F{REL_TEMPO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						mode="Opaque"
+						x="759"
+						y="2"
+						width="20"
+						height="13"
+						key="staticText-12"/>
+					<box></box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+				<text><![CDATA[seg]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="73"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-7"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="101"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-8"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="156"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-9"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="171"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-10"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="226"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-11"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="241"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-12"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="296"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-13"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="311"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-14"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="366"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-15"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="379"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-16"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="434"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-17"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="449"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-18"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="504"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-19"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="519"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-20"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="574"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-21"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="589"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-22"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="644"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-23"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="658"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-24"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="713"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-25"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						style="fontePadrao"
+						x="727"
+						y="0"
+						width="0"
+						height="17"
+						forecolor="#CCCCCC"
+						key="line-26"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="17"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="fontePadrao"
+						x="3"
+						y="1"
+						width="64"
+						height="15"
+						key="staticText-15"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Equivium]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="582"
+						y="2"
+						width="100"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="682"
+						y="2"
+						width="100"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
